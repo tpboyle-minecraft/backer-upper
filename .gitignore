@@ -1,0 +1,12 @@
+
+
+# Connection specific information
+connection.py
+
+# Generated folders - execution
+__pycache__
+.tmp
+backups/
+
+# Generated folders - environment
+.vscode
