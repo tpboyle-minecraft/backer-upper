@@ -44,9 +44,11 @@ tmp_dir = ".tmp"
 ## MAIN ##
 
 def main():
+    global tmp_dir
     # Locally create backup folder.
     curr_backup_dir = get_curr_backup_dir()
     curr_backup_dir.mkdir(parents=True, exist_ok=True)
+    tmp_dir = os.path.join(str(curr_backup_dir), tmp_dir)
     # Download world/ file & zip.
     #   I do this all three times so if there are any errors
     #    with one backup there are others to replace it.
