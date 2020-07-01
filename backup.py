@@ -23,14 +23,16 @@ import zipfile
 
 ##  LOCAL IMPORTS  ##
 
-import connection       #  IMPORTANT: you must define this file.
-        # It provides the following variables:
-        #    ip
-        #    username
-        #    password
-        #    remote_port
-        # These are used to connect to the remote FTP host.
-        # .gitignored by default because this needs to be set up by the user.
+import connection as conn  
+    # IMPORTANT: you must define this file.
+    # It provides the following variables:
+    #    ip
+    #    ftp_username
+    #    ftp_password
+    #    remote_port
+    # These are used to connect to the remote FTP host.
+    # ! >>  stopstart.py has some additional variables that need to be set.
+    # .gitignored by default because this needs to be set up by the user.
 
 
 ##  CONFIG  ##
@@ -109,14 +111,14 @@ def download_to_tmp():
 
 def setup_ftp():
     ftp = FTP(
-        host = connection.ip,
-        user = connection.username,
-        passwd = connection.password
+        host = conn.ip,
+        user = conn.ftp_username,
+        passwd = conn.ftp_password
     )
     ftp_host = ftputil.FTPHost(
-        connection.ip,
-        connection.username,
-        connection.password
+        conn.ip,
+        conn.ftp_username,
+        conn.ftp_password
     )
     return ftp, ftp_host
 

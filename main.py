@@ -1,5 +1,10 @@
 
 
+##  IMPORTS
+
+import time
+
+
 ##  LOCAL IMPORTS
 
 import backup
@@ -9,9 +14,10 @@ import stopstart
 ##  MAIN 
 
 def main():
-    # stopstart.stop()
+    stopstart.stop()
+    time.sleep(10)  # wait for server to fully stop
     backup.backup()
-    # stopstart.start()
+    stopstart.start()
 
 
 ##  EXE
