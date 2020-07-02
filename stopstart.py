@@ -30,11 +30,16 @@ def start():
 ##  PRIVATE METHODS
 
 def click_panel_btn(btn_name):
-    driver = webdriver.Firefox()
+    driver = setup_driver()
     navigate_to_panel(driver)
     action_btn = driver.find_element_by_name(btn_name)
     action_btn.click()
     driver.close()
+
+def setup_driver():
+    options = webdriver.FirefoxOptions()
+    options.set_headless()
+    return webdriver.Firefox(firefox_options=options)
 
 def navigate_to_panel(driver):
     login(driver)
