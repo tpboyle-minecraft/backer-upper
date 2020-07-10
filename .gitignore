@@ -10,3 +10,6 @@ backups/
 
 # Generated folders - environment
 .vscode
+
+# Logs
+*.log
