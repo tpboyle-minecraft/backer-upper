@@ -74,3 +74,23 @@ def click(btn):
     btn.click()
     time.sleep(click_buffer)
 
+
+##  EXE
+
+def help_msg():
+    print("You gotta enter either 'start' or 'stop', man. It just doesn't work that way.")
+
+def main():
+    args = sys.argv;
+    if(len(args) == 1):
+        help_msg()
+    elif(len(args) > 1):
+        if(args[1] == 'start'):
+            start()
+        elif(args[1] == 'stop'):
+            stop()
+        else:
+            help_msg()
+
+if __name__ == "__main__":
+    main()
