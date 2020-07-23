@@ -5,6 +5,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+import sys
+import time
+
 
 ##  LOCAL IMPORTS
 
@@ -17,6 +20,14 @@ import connection as conn
     # These are used to login to the web panel.
     # ! >>  backup.py has some additional variables that need to be set.
     # .gitignored by default because this needs to be set up by the user.
+
+
+##  CONSTANTS
+
+click_buffer = 15   # time in seconds to buffer around clicks so
+                    #   a) the page is fully loaded before
+                    #   b) the page fully registers the click after
+
 
 ##  PUBLIC INTERFACE
 
@@ -33,7 +44,7 @@ def click_panel_btn(btn_name):
     driver = setup_driver()
     navigate_to_panel(driver)
     action_btn = driver.find_element_by_name(btn_name)
-    action_btn.click()
+    click(action_btn)
     driver.close()
 
 def setup_driver():
@@ -52,8 +63,14 @@ def login(driver):
     password_box = driver.find_element_by_name("LoginForm[password]")
     enter_info(password_box, conn.admin_password)
     submit_btn = driver.find_element_by_name("yt0")
-    submit_btn.click()
+    click(submit_btn)
 
 def enter_info(input_elem, info):
     input_elem.clear()
     input_elem.send_keys(info)
+
+def click(btn):
+    time.sleep(click_buffer)
+    btn.click()
+    time.sleep(click_buffer)
+
