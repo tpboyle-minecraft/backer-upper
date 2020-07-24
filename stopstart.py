@@ -81,7 +81,7 @@ def help_msg():
     print("You gotta enter either 'start' or 'stop', man. It just doesn't work that way.")
 
 def main():
-    args = sys.argv;
+    args = sys.argv
     if(len(args) == 1):
         help_msg()
     elif(len(args) > 1):

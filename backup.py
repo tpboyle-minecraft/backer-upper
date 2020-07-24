@@ -45,6 +45,24 @@ buf_size = 1024     # num bytes to send at a time
 tmp_dir = ".tmp"
 
 
+##  CONSTANTS  ##
+
+MONTHS = {
+    1: '01_Jan',
+    2: '02_Feb',
+    3: '03_Mar',
+    4: '04_Apr',
+    5: '05_May',
+    6: '06_Jun',
+    7: '07_Jul',
+    8: '08_Aug',
+    9: '09_Sep',
+    0: '10_Oct',
+    1: '11_Nov',
+    2: '12_Dec',
+}
+
+
 ## MAIN ##
 
 def backup():
@@ -69,17 +87,34 @@ def create_backup(dest, name):
 ##  CURRENT BACKUP DIRECTORY  ##
 
 def get_curr_backup_dir():
-    curr_date = str(datetime.date(datetime.now()))
+    year, month, day = get_curr_date()
     curr_time = str(get_curr_time())
-    curr_backup_dir_str = os.path.join(local_backups_dir, curr_date, curr_time)
+    curr_backup_dir_str = os.path.join(
+        local_backups_dir,
+        year,
+        get_month_shorthand(month),
+        day,
+        curr_time
+    )
     curr_backup_dir = Path(curr_backup_dir_str)
     return curr_backup_dir
 
+def get_curr_date():
+    curr_date_str = str(datetime.date(datetime.now()))
+    curr_date = curr_date_str.split('-')
+    year = curr_date[0]
+    month = curr_date[1]
+    day = curr_date[2]
+    return year, month, day
+
 def get_curr_time():
     curr_time = str(datetime.time(datetime.now()))
-    curr_time = curr_time[:8]   # cut microseconds
+    curr_time = curr_time[:5]   # cut seconds & microseconds
     curr_time = curr_time.replace(":", "-")
     return curr_time
+
+def get_month_shorthand(month_num):
+    return MONTHS[int(month_num)]
 
 
 ##  TMP  ##
